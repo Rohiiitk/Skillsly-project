@@ -52,7 +52,7 @@ function AccordionContent({
       data-slot="accordion-content"
       className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}>
-      <div className={"bg-[#292524] text-white pt-0 pb-4 px-10"}>{children}</div>
+      <div className={"bg-[#292524] text-white pt-3 border-t-4 border-[#292524] pb-4 px-10 rounded-b-md"}>{children}</div>
     </AccordionPrimitive.Content>
   );
 }
