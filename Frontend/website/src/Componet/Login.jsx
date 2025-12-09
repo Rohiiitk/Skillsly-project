@@ -25,7 +25,7 @@ export default function Login({ page, setPage }) {
             <div className="flex mx-auto items-start">
                 <p className="font-medium text-3xl text-transparent bg-clip-text bg-[radial-gradient(circle,_#4DDCB7_0%,_#B8FB70_100%)]">Welcome Back!</p>
             </div>
-            <div className="">
+            <div className="flex flex-col w-full items-center px-15">
                 <form className="w-full my-4 flex items-start text-white flex-col gap-5">
                     <div className="w-full flex flex-col gap-1">
                         <label>Email :</label>
