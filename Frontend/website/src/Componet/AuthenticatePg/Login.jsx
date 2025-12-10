@@ -1,10 +1,11 @@
 import { useState } from "react"
-import Inputs from "./Inputs/Inputs";
+import Inputs from "../Inputs/Inputs";
+import { useNavigate } from "react-router-dom";
 export default function Login({ page, setPage }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const [error, setError] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // const handleLogin = async (e) => {
     //     e.preventDefault();
@@ -36,7 +37,7 @@ export default function Login({ page, setPage }) {
                         <Inputs type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="ex: @12345 " />
                     </div>
                     {/* {error && <p className="text-red-500 text-sm">{error}</p>} */}
-                    <button type="submit" className="bg-[#5B9944] font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5">Log In</button>
+                    <button type="submit" className="bg-[#5B9944] font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" onClick={() => navigate('/dashboard')}>Log In</button>
                     <p className="text-sm">Don't have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('signup')}>Sign Up</span></p>
                 </form>
             </div>

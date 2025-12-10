@@ -5,6 +5,7 @@ import './App.css'
 import LandingPg from '../Pages/LandingPg'
 import Authenticate from '../Pages/Authenticate'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Dashboard from '../Pages/Dashboard'
 
 function App() {
   const routes = (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPg />} />
         <Route path="/authenticate" element={<Authenticate />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router >
 

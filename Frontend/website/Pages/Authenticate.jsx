@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Login from "../src/Componet/Login"
-import SignUp from "../src/Componet/SignUp"
+import Login from "../src/Componet/AuthenticatePg/Login"
+import SignUp from "../src/Componet/AuthenticatePg/SignUp"
 export default function Authenticate() {
     const [page, setPage] = useState('login')
 
@@ -17,7 +17,6 @@ export default function Authenticate() {
                             {page === 'login' && <Login page={page} setPage={setPage} />}
                             {page === 'signup' && <SignUp />}
                         </div>
-
                     </div>
                 </div>
                 <img src="/parnesh.png" alt="person loging in" className="w-2/6 h-full" />
