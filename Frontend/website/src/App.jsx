@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import LandingPg from '../Pages/LandingPg'
 import Authenticate from '../Pages/Authenticate'
+import SignUpInfo from '../Pages/SignUpInfo'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Dashboard from '../Pages/Dashboard'
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPg />} />
         <Route path="/authenticate" element={<Authenticate />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Sign-up-info" element={<SignUpInfo />} />
       </Routes>
     </Router >
 
