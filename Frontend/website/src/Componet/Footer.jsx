@@ -39,10 +39,11 @@ const Footer = () => {
 
 <div className='flex justify-center gap-10 mt-6'>
     <div>
-        <img src="/LogoGroup.png" alt="" />
+        <img src="/Skillsly_LOGO.png" alt="Skillsly_logo" 
+ />
     </div>
     <div className='ml-30'>
-        <img src="/SocialMedia.png" alt="" />
+        <img src="/Instagram.webp" alt="" />
 
     </div>
 
