@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Inputs from "../Inputs/Inputs";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function SignUp({ page, setPage }) {
     const [name, setName] = useState('')
@@ -11,6 +12,10 @@ export default function SignUp({ page, setPage }) {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        if (!name) {
+            setError('Enter your name')
+            return
+        }
         if (!email) {
             setError("Enter Valid Email")
             return
@@ -23,10 +28,8 @@ export default function SignUp({ page, setPage }) {
         navigate('/dashboard')
     }
     return (
+
         <div className="flex flex-col items-center mt-2 gap-3 py-5">
-            <div className="flex mx-auto items-start">
-                <p className="font-medium text-3xl text-transparent bg-clip-text bg-[radial-gradient(circle,_#4DDCB7_0%,_#B8FB70_100%)]">Welcome Back!</p>
-            </div>
             <div className="flex flex-col w-full items-center px-15">
                 <form onSubmit={handleLogin} className="w-full my-4 flex items-start text-white flex-col gap-5">
                     <div className="w-full flex flex-col gap-1">
@@ -43,10 +46,11 @@ export default function SignUp({ page, setPage }) {
                     </div>
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                     <button type="submit" className="bg-[#5B9944] font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" >Log In</button>
-                    <p className="text-sm">have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('login')}>Log in</span></p>
+                    <p className="text-sm">Already have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('login')}>Log in</span></p>
                 </form>
             </div>
 
         </div>
+
     )
 } 

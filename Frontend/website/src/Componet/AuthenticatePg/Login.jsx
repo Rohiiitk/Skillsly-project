@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Inputs from "../Inputs/Inputs";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 export default function Login({ page, setPage }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,6 +23,7 @@ export default function Login({ page, setPage }) {
     }
 
     return (
+
         <div className="flex flex-col items-center mt-2 gap-3 py-5">
             <div className="flex mx-auto items-start">
                 <p className="font-medium text-3xl text-transparent bg-clip-text bg-[radial-gradient(circle,_#4DDCB7_0%,_#B8FB70_100%)]">Welcome Back!</p>
@@ -42,5 +44,6 @@ export default function Login({ page, setPage }) {
                 </form>
             </div>
         </div>
+
     )
 } 
