@@ -20,7 +20,7 @@ export default function Testimonial() {
             designation: "Student",
         },
         {
-            img: "/p3.png",
+            img: "/",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
@@ -30,27 +30,27 @@ export default function Testimonial() {
             designation: "Professor",
         },
         {
-            img: "/vite.svg",
+            img: "/",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
         {
-            img: "/vite.svg",
+            img: "/",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
         {
-            img: "/vite.svg",
+            img: "/",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
         {
-            img: "/vite.svg",
+            img: "/",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
         {
-            img: "/vite.svg",
+            img: "",
             words: "The structured content on Skillsly makes complex subjects so easy to grasp. It's the most efficient way to truly understand and apply new knowledge.",
             designation: "Professor",
         },
@@ -73,17 +73,15 @@ export default function Testimonial() {
                                 key={index}
                                 className="basis-[60%] sm:basis-1/6 transition-transform duration-300 ease-in-out"
                             >
-                                <div className="bg-white text-black p-5 rounded-2xl shadow-md hover:-translate-y-6 transition-transform flex flex-col justify-between h-[320px]">
-                                    <div className="flex flex-col items-center gap-8 mb-4">
-                                        <img
-                                            src={item.img}
-                                            alt="profile"
-                                            width={80}
-                                            height={80}
-                                            className="rounded-full -mt-15 scale-120 h-auto"
-                                        />
-                                        <h2 className="font-bold text-base">{item.designation}</h2>
-                                    </div>
+                                <div className="bg-white w-full text-black pb-10 p-5 rounded-2xl shadow-md hover:-translate-y-6 transition-transform flex flex-col justify-between h-[320px]">
+                                    <img
+                                        src={item.img}
+                                        alt="profile"
+                                        width={80}
+                                        height={80}
+                                        className="rounded-full -mt-25 scale-150 h-50 w-full"
+                                    />
+                                    <h2 className="font-bold text-base">{item.designation}</h2>
                                     <p className="text-sm leading-relaxed">{item.words}</p>
                                 </div>
                             </CarouselItem>
