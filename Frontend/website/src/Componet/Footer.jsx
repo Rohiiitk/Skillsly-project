@@ -1,8 +1,9 @@
+import { Copyright, Facebook, Github, Instagram, Linkedin, Mailbox } from 'lucide-react';
 import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#1e1e1e] overflow-hidden relative min-h-screen">
+    <footer className="w-full bg-[#1e1e1e] overflow-hidden relative min-h-screen" id='footer'>
       <div className="relative -mt-30 w-full h-[420px]">
         <img
           src="/GreenBlobShades.png"
@@ -16,31 +17,26 @@ const Footer = () => {
           className="absolute top-20 left-0 -mt-12 w-full object-cover z-10"
         />
       </div>
-      <div className='flex mt-10 justify-center'>
-        <div className='text-center mt-10 text-white flex gap-20' >
-          <a href="" className=''>home</a>
-          <a href="">how its works</a>
-          <a href="">find peer</a>
+      <div className='flex mt-30 justify-center'>
+        <div className='text-center mt-10 underline  text-white flex gap-20' >
+          <a className='hover:text-green-400' href="#heropg">home</a>
+          <a className='hover:text-green-400' href="">how its works</a>
+          <a className='hover:text-green-400' href="">find peer</a>
+          <a className='hover:text-green-400' href="#FAQ">FAQ</a>
         </div>
 
       </div>
-
-      <div className='flex justify-center gap-10 mt-6'>
-        <div>
-          <img src="/LogoGroup.png" alt="" />
+      <div className='flex justify-around mt-15 w-full h-auto'>
+        <h1 className='text-5xl text-white'>SkillSly</h1>
+        <div className='flex ml-20 gap-15 text-white'>
+          <button className='p-4 rounded-full hover:text-green-400 hover:border-green-400 border border-white'><Facebook /></button>
+          <button className='p-4 rounded-full hover:text-green-400 hover:border-green-400 border border-white'><Github /></button>
+          <button className='p-4 rounded-full hover:text-green-400 hover:border-green-400 border border-white'><Linkedin /></button>
+          <button className='p-4 rounded-full hover:text-green-400 hover:border-green-400 border border-white'><Instagram /></button>
+          <button className='p-4 rounded-full hover:text-green-400 hover:border-green-400 border border-white'><Mailbox /></button>
         </div>
-        <div className='ml-30'>
-          <img src="/SocialMedia.png" alt="" />
-
-        </div>
-
-        <div className='text-white'>
-          <p>2021 tokners.All rights reserved</p>
-          <p>orignal design by RRK</p>
-        </div>
+        <p className='text-white text-sm flex justify-center text-end'><Copyright /> 2025 Skillsly All rights reserverd. <br /> Original design by RRK</p>
       </div>
-
-
     </footer>
   );
 };

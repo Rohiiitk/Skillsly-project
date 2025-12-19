@@ -10,7 +10,7 @@ export default function SignUp({ page, setPage }) {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         if (!name) {
             setError('Enter your name')
@@ -25,13 +25,13 @@ export default function SignUp({ page, setPage }) {
             return
         }
         setError('')
-        navigate('/dashboard')
+        navigate('/Sign-up-info')
     }
     return (
 
         <div className="flex flex-col items-center mt-2 gap-3 py-5">
             <div className="flex flex-col w-full items-center px-15">
-                <form onSubmit={handleLogin} className="w-full my-4 flex items-start text-white flex-col gap-5">
+                <form onSubmit={handleSignUp} className="w-full my-4 flex items-start text-white flex-col gap-5">
                     <div className="w-full flex flex-col gap-1">
                         <label>Name :</label>
                         <Inputs type="text" value={name} onChange={(e) => { setName(e.target.value) }} placeholder="Enter your Name" />
@@ -45,7 +45,7 @@ export default function SignUp({ page, setPage }) {
                         <Inputs type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="ex: @12345 " />
                     </div>
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <button type="submit" className="bg-[#5B9944] font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" >Log In</button>
+                    <button type="submit" className="bg-[#5B9944] hover:bg-[#B8FB70] text-white hover:text-black font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-lg p-2 w-full mt-5" >Sign In</button>
                     <p className="text-sm">Already have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('login')}>Log in</span></p>
                 </form>
             </div>

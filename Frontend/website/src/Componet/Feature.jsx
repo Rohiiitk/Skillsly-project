@@ -1,4 +1,3 @@
-import ScrollStack, { ScrollStackItem } from '../components/ScrollStack'
 import CardSwap, { Card } from '../components/CardSwap'
 import CountUp from '../components/CountUp'
 import { Gamepad2, NotebookPen, Video } from 'lucide-react';

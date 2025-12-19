@@ -30,7 +30,7 @@ export default function FAQ() {
         },
     ]
     return (
-        <section className="bg-gradient-to-b from-[#000000] to-[#292524] w-full h-full flex flex-col justify-start py-10 items-center gap-20">
+        <section className="bg-gradient-to-b from-[#000000] to-[#292524] w-full h-full flex flex-col justify-start py-20 items-center gap-20" id="FAQ">
             <h1 className="flex flex-col items-center text-5xl text-white"><span className="bg-[radial-gradient(ellipse_at_center,_#4DDCB7_0%,_#B8FB70_100%)] bg-clip-text font-bold text-transparent">FAQ'S</span>Section</h1>
             <div className="text-white w-2/4 h-auto">
                 <Accordion type="single" collapsible>

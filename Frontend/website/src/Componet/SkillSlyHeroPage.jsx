@@ -1,5 +1,6 @@
 import React from 'react';
-
+import WorkFlow from '../Componet/WorkFlow';
+import { useNavigate } from 'react-router-dom';
 
 const IMAGES = {
   characterOlder: '/Whiteman.png',
@@ -11,8 +12,11 @@ const IMAGES = {
 };
 
 const SkillSlyHeroPage = () => {
+
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-[#292524] text-white p-4 overflow-hidden relative">
+    <div className="min-h-screen bg-[#292524] text-white p-4 overflow-hidden relative" id='heropg'>
 
 
       <header className="flex justify-between items-center py-4 px-6 md:px-12 relative z-50">
@@ -22,14 +26,15 @@ const SkillSlyHeroPage = () => {
 
         {/* Navigation Links */}
         <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold">
-          <a href="#" className="hover:text-green-400 transition-colors">Home</a>
-          <a href="#" className="hover:text-green-400 transition-colors">How It Works</a>
-          <a href="#" className="hover:text-green-400 transition-colors">Find Peers</a>
-          <a href="#" className="hover:text-green-400 transition-colors">Community</a>
+          <a href="#heropg" className="hover:text-green-400 transition-colors">Home</a>
+          <a href="#workflow" className="hover:text-green-400 transition-colors">How It Works</a>
+          <a href="" className="hover:text-green-400 transition-colors">Find Peers</a>
+          <a href="#FAQ" className="hover:text-green-400 transition-colors">FAQ</a>
+          <a href="#footer" className="hover:text-green-400 transition-colors">Contact us</a>
         </nav>
 
         {/* Sign In Button */}
-        <button className="px-6 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors">
+        <button className="px-6 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors" onClick={() => navigate('/authenticate')}>
           SIGN IN / LOGIN
         </button>
       </header>
@@ -60,11 +65,11 @@ const SkillSlyHeroPage = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-4 mt-8">
-            <button className="px-8 py-3 bg-green-500 hover:bg-green-600 text-black font-bold rounded-lg transition-colors shadow-lg">
+            <button className="px-8 py-3 bg-green-500 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg transition-colors shadow-lg" onClick={() => navigate('/authenticate')}>
               SIGN UP
             </button>
-            <button className="px-8 py-3 border border-gray-400 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
-              EXPLORE NOW
+            <button className="px-8 py-3 border border-gray-400 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg bg-transparent transition-colors" onClick={() => navigate('/dashboard')}>
+              Get Started
             </button>
           </div>
         </div>

@@ -91,11 +91,11 @@ const CallToAction = () => {
                         <p className="text-white font-light max-w-lg -ml-8">
                             Connect with learners like you, collaborate to share skills, and cultivate new knowledge every session. With SkillSly, growth isn't a solo journey — it's a community effort. Join today and start building skills together.
                         </p>
-                        <div className='flex gap-10'>
-                            <button className="px-8 py-3 bg-green-500 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg transition-colors shadow-lg">
+                        <div className='w-full flex -ml-5 gap-10'>
+                            <button className="w-1/4 px-8 py-3 bg-green-500 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg transition-colors shadow-lg">
                                 Register
                             </button>
-                            <button className="px-8 py-3 bg-green-500 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg transition-colors shadow-lg">
+                            <button className="w-1/4 px-8 py-3 bg-green-500 hover:bg-[#B8FB70] text-white hover:text-black font-bold rounded-lg transition-colors shadow-lg">
                                 SIGN IN
                             </button>
                         </div>

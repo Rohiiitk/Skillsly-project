@@ -6,6 +6,10 @@ body {
   font-family: Poppins, 'sans-serif';
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .embla__viewport {
   overflow: visible !important;
 }

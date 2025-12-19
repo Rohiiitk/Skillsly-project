@@ -3,6 +3,7 @@ import Stepper, { Step } from "../../components/Stepper"
 import ProfilePicSelector from "../ProfilePicSelector";
 import Inputs from "../Inputs/Inputs";
 import MultiImageSelector from "../MultiImageSelector";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpInfo() {
 
@@ -15,6 +16,8 @@ export default function SignUpInfo() {
     const [workProofImg, setWorkProofImg] = useState([])
     const [url, setUrl] = useState('')
     const [languageKnown, setLanguageKnown] = useState([])
+    const [error, setError] = useState([]);
+    const navigate = useNavigate();
 
     const toggleSkill = (skill) => {
         setSkillsKnown(prev =>
@@ -39,125 +42,172 @@ export default function SignUpInfo() {
                 : [...prev, lang]
         );
     };
+
+    const handleSubmitSignInInfo = (e) => {
+        e.preventDefault();
+
+        const errors = [];
+
+        if (skillsKnown.length === 0) {
+            errors.push('Enter the skills you know (Step 1)');
+        }
+
+        if (skillWantToKnow.length === 0) {
+            errors.push('Enter the skills you want to learn (Step 1)');
+        }
+
+        if (languageKnown.length === 0) {
+            errors.push('Enter languages you know (Step 3)');
+        }
+
+        if (errors.length > 0) {
+            setError(errors);
+            return;
+        }
+
+        setError([])
+        navigate('/dashboard')
+
+    }
     return (
         <div className="flex h-fit bg-[#292524] justify-between text-white items-center w-full">
-
-            <Stepper
-                initialStep={1}
-                onStepChange={(step) => {
-                    console.log(step);
-                }}
-                onFinalStepCompleted={() => console.log("All steps completed!")}
-                backButtonText="Previous"
-                nextButtonText="Next"
-            >
-                <Step >
-                    <div className="flex flex-col gap-10 justify-center py-2 items-center">
-                        <div className="w-full h-auto flex flex-col gap-10">
-                            <h2><span className="text-xl">Welcome!</span>  Enter The Skills as per Your Needs </h2>
-                            <input
-                                type="hidden"
-                                name="skillsKnown"
-                                value={skillsKnown.join(",")}
-                            />
-                            <div className="flex flex-col gap-5 justify-center">
-                                <h2 className="text-sm pl-2">Select The Skills <span className="text-lg text-green-400">" YOU " </span> Know :</h2>
-                                <div className="flex flex-wrap gap-3 text-white">
-                                    {skillsList.map(skill => (
-                                        <button
-                                            type="button"
-                                            key={skill}
-                                            onClick={() => toggleSkill(skill)}
-                                            className={`px-4 py-2 rounded-full text-sm border transition
+            <form onSubmit={handleSubmitSignInInfo} className="w-full h-auto ">
+                <Stepper
+                    initialStep={1}
+                    onStepChange={(step) => {
+                        console.log(step);
+                    }}
+                    onFinalStepCompleted={() => console.log("All steps completed!")}
+                    backButtonText="Previous"
+                    nextButtonText="Next"
+                    onComplete={handleSubmitSignInInfo}
+                >
+                    <Step >
+                        <div className="flex flex-col gap-10 justify-center py-2 items-center">
+                            <div className="w-full h-auto flex flex-col gap-10">
+                                <h2><span className="text-xl">Welcome!</span>  Enter The Skills as per Your Needs </h2>
+                                <input
+                                    type="hidden"
+                                    name="skillsKnown"
+                                    value={skillsKnown.join(",")}
+                                />
+                                <div className="flex flex-col gap-5 justify-center">
+                                    <h2 className="text-sm pl-2">Select The Skills <span className="text-lg text-green-400">" YOU " </span> Know :</h2>
+                                    <div className="flex flex-wrap gap-3 text-white">
+                                        {skillsList.map(skill => (
+                                            <button
+                                                type="button"
+                                                key={skill}
+                                                onClick={() => toggleSkill(skill)}
+                                                className={`px-4 py-2 rounded-full text-sm border transition
                                                 ${skillsKnown.includes(skill)
-                                                    ? "bg-green-500 text-white border-green-500"
-                                                    : "bg-transparent text-white border-gray-500 hover:border-green-400"
-                                                }`}
-                                        >
-                                            {skill}
-                                        </button>
-                                    ))}
+                                                        ? "bg-green-500 text-white border-green-500"
+                                                        : "bg-transparent text-white border-gray-500 hover:border-green-400"
+                                                    }`}
+                                            >
+                                                {skill}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-full h-auto flex flex-col gap-10">
-                            <input
-                                type="hidden"
-                                name="skillsKnown"
-                                value={skillWantToKnow.join(",")}
-                            />
-                            <div className="flex flex-col gap-5 justify-center">
-                                <h2 className="text-sm pl-2">Select The Skills you<span className="text-lg text-green-400"> " WANT " </span>to Learn :</h2>
-                                <div className="flex flex-wrap gap-3 text-white">
-                                    {skillsList.map(skill => (
-                                        <button
-                                            type="button"
-                                            key={skill}
-                                            onClick={() => toggleSkillWantToKnow(skill)}
-                                            className={`px-4 py-2 rounded-full text-sm border transition
+                            <div className="w-full h-auto flex flex-col gap-10">
+                                <input
+                                    type="hidden"
+                                    name="skillsKnown"
+                                    value={skillWantToKnow.join(",")}
+                                />
+                                <div className="flex flex-col gap-5 justify-center">
+                                    <h2 className="text-sm pl-2">Select The Skills you<span className="text-lg text-green-400"> " WANT " </span>to Learn :</h2>
+                                    <div className="flex flex-wrap gap-3 text-white">
+                                        {skillsList.map(skill => (
+                                            <button
+                                                type="button"
+                                                key={skill}
+                                                onClick={() => toggleSkillWantToKnow(skill)}
+                                                className={`px-4 py-2 rounded-full text-sm border transition
                                                 ${skillWantToKnow.includes(skill)
-                                                    ? "bg-green-500 text-white border-green-500"
-                                                    : "bg-transparent text-white border-gray-500 hover:border-green-400"
-                                                }`}
-                                        >
-                                            {skill}
-                                        </button>
-                                    ))}
+                                                        ? "bg-green-500 text-white border-green-500"
+                                                        : "bg-transparent text-white border-gray-500 hover:border-green-400"
+                                                    }`}
+                                            >
+                                                {skill}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Step>
-                <Step>
-                    <div className="py-5 flex flex-col gap-10 -mt-5">
-                        <ProfilePicSelector image={profilePic} setImage={setProfilePic} />
-                        <div className="flex flex-col gap-5">
-                            <div>
-                                <p className="text-[16px]">Social platform/Protfolio website URL :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
-                                <Inputs type="url" value={url} onChange={(e) => { setUrl(e.target.value) }} placeholder="https://example.com" />
-                            </div>
-                            <div>
-                                <p className="text-[16px]">Short Bio/Description :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
-                                <textarea className="w-full h-3/5 outline-none bg-slate-200 text-black rounded-xl p-3 " placeholder="Tell others what you’re good at, how you like to teach/learn…" >
-                                </textarea>
+                    </Step>
+                    <Step>
+                        <div className="py-5 flex flex-col gap-10 -mt-5">
+                            <ProfilePicSelector image={profilePic} setImage={setProfilePic} />
+                            <div className="flex flex-col gap-5">
+                                <div>
+                                    <p className="text-[16px]">Social platform/Protfolio website URL :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
+                                    <Inputs type="url" value={url} onChange={(e) => { setUrl(e.target.value) }} placeholder="https://example.com" />
+                                </div>
+                                <div>
+                                    <p className="text-[16px]">Short Bio/Description :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
+                                    <textarea className="w-full h-3/5 outline-none bg-slate-200 text-black rounded-xl p-3 " placeholder="Tell others what you’re good at, how you like to teach/learn…" >
+                                    </textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Step>
-                <Step>
-                    <div className="flex flex-col gap-5 py-5 px-3">
-                        <p>Language You Know :</p>
-                        <div className="flex flex-wrap gap-2 w-full">
-                            {languages.map(lang => (
-                                <button
-                                    type="button"
-                                    key={lang}
-                                    onClick={() => toggleLanguageKnow(lang)}
-                                    className={`px-4 py-2 rounded-full text-sm border transition
+                    </Step>
+                    <Step>
+                        <div className="flex flex-col gap-5 py-5 px-3">
+                            <p>Language You Know :</p>
+                            <div className="flex flex-wrap gap-2 w-full">
+                                {languages.map(lang => (
+                                    <button
+                                        type="button"
+                                        key={lang}
+                                        onClick={() => toggleLanguageKnow(lang)}
+                                        className={`px-4 py-2 rounded-full text-sm border transition
                                                 ${languageKnown.includes(lang)
-                                            ? "bg-green-500 text-white border-green-500"
-                                            : "bg-transparent text-white border-gray-500 hover:border-green-400"
-                                        }`}
-                                >
-                                    {lang}
-                                </button>
+                                                ? "bg-green-500 text-white border-green-500"
+                                                : "bg-transparent text-white border-gray-500 hover:border-green-400"
+                                            }`}
+                                    >
+                                        {lang}
+                                    </button>
 
-                            ))}
+                                ))}
+                            </div>
+                            <MultiImageSelector images={workProofImg} setImages={setWorkProofImg} max={5} />
                         </div>
-                        <MultiImageSelector images={workProofImg} setImages={setWorkProofImg} max={5} />
-                    </div>
-                </Step>
-                <Step>
-                    <div className="flex justify-evenly items-center py-5">
-                        <img className="scale-90 h-60" src="/Final-step1.png" alt="" />
-                        <div className="flex flex-col justify-center items-center gap-4">
-                            <h1 className="text-2xl">You Made it !!</h1>
-                            <p className="text-sm text-gray-400">make sure all the information is right <br /> if not you can go back to Previous steps </p>
+                    </Step>
+                    <Step>
+                        <div className="flex justify-evenly items-center py-5">
+                            <img className="scale-90 h-60" src={error.length > 0 ? '/SadStep-1.png' : '/Final-step1.png'} alt="" />
+                            <div className="flex flex-col justify-center items-center gap-4">
+                                {error.length > 0 ?
+                                    (
+                                        <div className="flex flex-col gap-7">
+                                            <h1 className="text-center text-2xl">There were some <br /> Mistakes </h1>
+                                            {error.length > 0 && (
+                                                error.map((err, index) => (
+                                                    <p className="text-red-500 font-light text-sm"><span className="text-white text-sm mr-2">{index + 1}.</span>{err}</p>
+                                                ))
+                                            )
+                                            }
+                                        </div>
+                                    ) :
+                                    (
+                                        <>
+                                            <h1 className="text-2xl">You Made it !!</h1>
+                                            <p className="text-sm text-gray-400">make sure all the information is right <br /> if not you can go back to Previous steps </p>
+                                        </>
+                                    )
+                                }
+                            </div>
+                            <img className="scale-90 h-60" src={error.length > 0 ? '/SadStep-2.png' : '/Final-step2.png'} alt="" />
                         </div>
-                        <img className="scale-90 h-60" src="/Final-step2.png" alt="" />
-                    </div>
-                </Step>
-            </Stepper>
+
+                    </Step>
+                </Stepper>
+            </form>
             <img src="/parnesh2.png" alt="person loging in" className="w-2/6 h-dvh" />
 
         </div>

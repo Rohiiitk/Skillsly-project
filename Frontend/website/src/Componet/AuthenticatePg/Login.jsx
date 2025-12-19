@@ -39,7 +39,7 @@ export default function Login({ page, setPage }) {
                         <Inputs type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="ex: @12345 " />
                     </div>
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <button type="submit" className="bg-[#5B9944] font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" >Log In</button>
+                    <button type="submit" className="bg-[#5B9944] hover:bg-[#B8FB70] hover:text-black font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" >Log In</button>
                     <p className="text-sm">Don't have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('signup')}>Sign Up</span></p>
                 </form>
             </div>

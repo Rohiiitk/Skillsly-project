@@ -17,6 +17,7 @@ export default function Stepper({
   nextButtonText = 'Continue',
   disableStepIndicators = false,
   renderStepIndicator,
+  onComplete,
   ...rest
 }) {
   const [currentStep, setCurrentStep] = useState(initialStep);
@@ -47,11 +48,13 @@ export default function Stepper({
     }
   };
 
-  const handleComplete = () => {
-    setDirection(1);
-    updateStep(totalSteps + 1);
-    navigate('/dashboard')
-    /////
+  const handleComplete = (e) => {
+    // setDirection(1);
+    // updateStep(totalSteps + 1);
+    if (onComplete) {
+      onComplete(e)
+    }
+
   };
 
   return (
@@ -115,6 +118,7 @@ export default function Stepper({
               )}
               <button
                 onClick={isLastStep ? handleComplete : handleNext}
+                type={isLastStep ? 'submit' : 'button'}
                 className="duration-350 flex items-center justify-center rounded-full bg-[#B8FB70] py-1.5 px-3.5 font-medium tracking-tight text-black hover:text-white transition hover:bg-green-600 active:bg-green-700"
                 {...nextButtonProps}>
                 {isLastStep ? 'Complete' : nextButtonText}
@@ -134,7 +138,7 @@ function StepContentWrapper({ isCompleted, currentStep, direction, children, cla
     <motion.div
       style={{ position: 'relative', overflow: 'hidden' }}
       animate={{ height: isCompleted ? 0 : parentHeight }}
-      transition={{ type: 'spring', duration: 0.4 }}
+      transition={{ type: 'spring', duration: 0.9 }}
       className={className}>
       <AnimatePresence initial={false} mode="sync" custom={direction}>
         {!isCompleted && (

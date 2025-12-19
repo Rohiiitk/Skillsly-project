@@ -2,7 +2,7 @@ import React from "react"
 
 export default function WorkFlow() {
     return (
-        <section className="bg-black py-10 pb-30 overflow-hidden text-center">
+        <section className="bg-black py-10 pb-30 overflow-hidden text-center" id="workflow">
             <div className="flex flex-col items-center mx-auto text-center gap-10">
                 <h1 className="flex text-5xl text-white font-semibold">
                     How SkillSly
@@ -61,6 +61,7 @@ export default function WorkFlow() {
                     </div>
                     <p className="w-5/6 pl-5 -mt-3 text-left text-xs text-white">Skillsly provides video call option after scheduling session where’in you can use use our notes section to save any important points which you can go back
                         in notes section and access it and Dont forget to rate your mentor for his/her teaching.</p>
+                    <img src="/VideoChatWork.png" className="scale-60 -mt-50" alt="" />
                 </div>
             </div>
             <div className="bg-[#4DDCB7] blur-2xl rounded-full z-10 w-96 h-92 -mt-20 -mb-50 ml-[80%]"></div>
