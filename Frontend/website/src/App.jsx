@@ -1,34 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import LandingPg from '../Pages/LandingPg'
 import Authenticate from '../Pages/Authenticate'
 import SignUpInfo from '../Pages/SignUpInfo'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import Dashboard from '../Pages/Dashboard'
+import Dashboard from '../Pages/Dashboard' 
 import Dashboard2 from '../Pages/Dashboard2'
 
 function App() {
-  const routes = (
-    < Router >
+  return (
+    <Router>
       <Routes>
         <Route path="/" element={<LandingPg />} />
         <Route path="/authenticate" element={<Authenticate />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/dashboard2" element={<Dashboard2 />} />
         <Route path="/Sign-up-info" element={<SignUpInfo />} />
       </Routes>
-    </Router >
-
+    </Router>
   );
-  return (
-
-    <div className="">
-      {routes}
-    </div>
-
-  )
 }
 
-export default App
+export default App;

@@ -1,4 +1,4 @@
-import GroupSection from '../src/Componet/GroupSection'
+import GroupSection from '../src/Componet/DashBoardMain'
 export default function Dashboard() {
     return (
         <div>
