@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import WorkFlow from '../Componet/WorkFlow';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from './Context/UserContext';
 
 const IMAGES = {
   characterOlder: '/Whiteman.png',
@@ -14,6 +15,7 @@ const IMAGES = {
 const SkillSlyHeroPage = () => {
 
   const navigate = useNavigate();
+  const { user, clearUser } = useContext(UserContext)
 
   return (
     <div className="min-h-screen bg-[#292524] text-white p-4 overflow-hidden relative" id='heropg'>
@@ -34,9 +36,19 @@ const SkillSlyHeroPage = () => {
         </nav>
 
         {/* Sign In Button */}
-        <button className="px-6 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors" onClick={() => navigate('/authenticate')}>
-          SIGN IN / LOGIN
-        </button>
+        {user ? (
+          <div className='flex items-center gap-3'>
+            <img src={user.profileImageUrl} alt="profile image" className='w-12 h-12 rounded-full object-cover border-2 border-white' />
+            <div className='flex flex-col justify-center items-start'>
+              <h1 className='text-xl font-bold'>{user.userName}</h1>
+              <button onClick={clearUser} className='text-trasparent hover:text-red-500 text-sm cursor-pointer' style={{ WebkitTextStroke: "0.2px white" }}>Log out</button>
+            </div>
+          </div>
+        ) : (
+          <button className="px-6 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors" onClick={() => navigate('/authenticate')}>
+            SIGN IN / LOGIN
+          </button>
+        )}
       </header>
 
       {/* -------------------- HERO SECTION CONTENT -------------------- */}

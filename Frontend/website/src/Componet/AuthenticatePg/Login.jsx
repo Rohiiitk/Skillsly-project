@@ -1,11 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Inputs from "../Inputs/Inputs";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import axiosinstance from "../../Utilities/axiosIntance";
+import { UserContext } from "../Context/UserContext";
+import { GoogleLogin } from "@react-oauth/google";
 export default function Login({ page, setPage }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -19,7 +23,21 @@ export default function Login({ page, setPage }) {
             return
         }
         setError('')
-        navigate('/dashboard')
+        try {
+            const response = await axiosinstance.post('http://localhost:5000/api/auth/login', { email, password })
+
+            const { token } = response.data
+            if (token) {
+                localStorage.setItem('token', response.data.token)
+                updateUser(response.data.user)
+                navigate('/dashboard')
+            } else {
+                setError(response.data.message)
+            }
+        } catch (error) {
+            setError(error.response.data.message || "Login Failed")
+        }
+
     }
 
     return (
@@ -40,6 +58,29 @@ export default function Login({ page, setPage }) {
                     </div>
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                     <button type="submit" className="bg-[#5B9944] hover:bg-[#B8FB70] hover:text-black font-medium to-orange-500 rounded-xl px-10 cursor-pointer text-white text-lg p-2 w-full mt-5" >Log In</button>
+                    <div className="w-full h-auto flex flex-col justify-center mt-1">
+                        <GoogleLogin
+                            text="continue_with"
+                            theme="filled_blue"
+                            onSuccess={async (credentialResponse) => {
+                                try {
+                                    const res = await axiosinstance.post(
+                                        "http://localhost:5000/api/auth/google-login",
+                                        { credential: credentialResponse.credential }
+                                    );
+
+                                    localStorage.setItem("token", res.data.token);
+                                    updateUser(res.data.user);
+                                    navigate("/dashboard");
+                                } catch (err) {
+                                    setError(err.response?.data?.message || "Google login failed");
+                                }
+                            }}
+                            onError={() => setError("Google login failed")}
+
+                        />
+                    </div>
+
                     <p className="text-sm">Don't have an account? <span className="text-[#5B9944] underline cursor-pointer" onClick={() => setPage('signup')}>Sign Up</span></p>
                 </form>
             </div>

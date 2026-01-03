@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import Sidebar from './DashboardPg/SideBarMenu'; 
+import Sidebar from './DashboardPg/SideBarMenu';
 import UserProfile from './DashboardPg/Profile';
 import SearchSkills from './DashboardPg/SearchSkills';
 import GroupsList from './DashboardPg/GroupsList';
@@ -18,7 +18,7 @@ const GroupSection = () => {
       <main className="flex-grow overflow-y-auto">
         <Routes>
           <Route index element={<UserProfile />} />
-          
+
           <Route path="search" element={<SearchSkills />} />
           <Route path="groups" element={<GroupsList />} />
           <Route path="notes" element={<NotesList />} />

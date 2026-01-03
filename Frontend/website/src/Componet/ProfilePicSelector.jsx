@@ -38,7 +38,7 @@ const ProfilePicSelector = ({ image, setImage, preview, setPreview }) => {
                         </div>
                     ) :
                     (
-                        <div className="flex mx-auto justify-center flex-col items-center -my-5 w-34 h-34 rounded-full">
+                        <div className="flex mx-auto justify-center flex-col items-center w-34 h-34 rounded-full">
                             <img src={preview || previewUrl} alt="profile photo" className="w-24 h-24 object-cover rounded-full" />
                             <button className="cursor-pointer p-2 bg-green-600 hover:bg-red-600 text-white rounded-full flex justify-center -mt-5 ml-15 items-center" type="button" onClick={handleRemoveImage}><Trash /></button>
                         </div>

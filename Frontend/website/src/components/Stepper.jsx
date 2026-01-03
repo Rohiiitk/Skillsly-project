@@ -49,8 +49,8 @@ export default function Stepper({
   };
 
   const handleComplete = (e) => {
-    // setDirection(1);
-    // updateStep(totalSteps + 1);
+    setDirection(1);
+    updateStep(totalSteps + 1);
     if (onComplete) {
       onComplete(e)
     }

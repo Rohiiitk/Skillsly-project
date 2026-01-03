@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Stepper, { Step } from "../../components/Stepper"
 import ProfilePicSelector from "../ProfilePicSelector";
 import Inputs from "../Inputs/Inputs";
 import MultiImageSelector from "../MultiImageSelector";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+import axiosinstance from "../../Utilities/axiosIntance";
+import { uploadWorkImages } from "../Inputs/UploadToSupabase";
 
 export default function SignUpInfo() {
 
@@ -12,20 +15,24 @@ export default function SignUpInfo() {
 
     const [skillsKnown, setSkillsKnown] = useState([]);
     const [skillWantToKnow, setSkillWantToKnow] = useState([])
-    const [profilePic, setProfilePic] = useState(null)
     const [workProofImg, setWorkProofImg] = useState([])
     const [url, setUrl] = useState('')
+    const [bio, setBio] = useState('')
     const [languageKnown, setLanguageKnown] = useState([])
     const [error, setError] = useState([]);
+    const { user, updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const toggleSkill = (skill) => {
-        setSkillsKnown(prev =>
-            prev.includes(skill)
-                ? prev.filter(s => s !== skill)
-                : [...prev, skill]
-        );
+        if (skillsKnown.includes(skill)) {
+            setSkillsKnown(skillsKnown.filter(s => s !== skill));
+        } else {
+            setSkillsKnown([...skillsKnown, skill]);
+        }
+        console.log(skillsKnown);
     };
+
+    console.log(workProofImg);
 
     const toggleSkillWantToKnow = (skill) => {
         setSkillWantToKnow(prev =>
@@ -33,6 +40,7 @@ export default function SignUpInfo() {
                 ? prev.filter(s => s !== skill)
                 : [...prev, skill]
         );
+        console.log(skillWantToKnow);
     };
 
     const toggleLanguageKnow = (lang) => {
@@ -43,7 +51,7 @@ export default function SignUpInfo() {
         );
     };
 
-    const handleSubmitSignInInfo = (e) => {
+    const handleSubmitSignInInfo = async (e) => {
         e.preventDefault();
 
         const errors = [];
@@ -66,8 +74,19 @@ export default function SignUpInfo() {
         }
 
         setError([])
-        navigate('/dashboard')
 
+        try {
+            const workImageUrl = await uploadWorkImages(workProofImg, user.email);
+            console.log("Work images uploaded:", workImageUrl);
+            const response = await axiosinstance.put('http://localhost:5000/api/auth/register-final', { email: user.email, skillsKnow: skillsKnown, skillsWantToKnow: skillWantToKnow, socialLink: url, languages: languageKnown, workImageUrl: workImageUrl, bio: bio });
+            if (response && response.data && response.data.user) {
+                updateUser(response.data);
+                console.log("User info taken successfully");
+                navigate('/dashboard')
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
     return (
         <div className="flex h-fit bg-[#292524] justify-between text-white items-center w-full">
@@ -141,7 +160,6 @@ export default function SignUpInfo() {
                     </Step>
                     <Step>
                         <div className="py-5 flex flex-col gap-10 -mt-5">
-                            <ProfilePicSelector image={profilePic} setImage={setProfilePic} />
                             <div className="flex flex-col gap-5">
                                 <div>
                                     <p className="text-[16px]">Social platform/Protfolio website URL :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
@@ -149,7 +167,7 @@ export default function SignUpInfo() {
                                 </div>
                                 <div>
                                     <p className="text-[16px]">Short Bio/Description :<br /><span className="text-gray-500 text-sm">(optional but reccomended)</span></p>
-                                    <textarea className="w-full h-3/5 outline-none bg-slate-200 text-black rounded-xl p-3 " placeholder="Tell others what you’re good at, how you like to teach/learn…" >
+                                    <textarea value={bio} onChange={(e) => { setBio(e.target.value) }} className="w-full h-3/5 outline-none bg-slate-200 text-black rounded-xl p-3 " placeholder="Tell others what you’re good at, how you like to teach/learn…" >
                                     </textarea>
                                 </div>
                             </div>

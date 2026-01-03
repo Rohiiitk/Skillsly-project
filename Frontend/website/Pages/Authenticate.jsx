@@ -22,8 +22,8 @@ export default function Authenticate() {
                             damping: 20,
                         }}
                         className="w-full h-fit">
-                        <div className="w-2/4 h-fit bg-[#30312E] p-5 pt-10 flex flex-col items-center rounded-2xl mx-auto shadow-[0_10px_20px_rgba(10,10,10,0.7)]">
-                            <div className="w-3/4 min-h-18 h-18 bg-[#B6B6B6] rounded-2xl p-2">
+                        <div className="w-fit min-w-[500px] h-fit bg-[#30312E] px-2 py-5 pt-10 flex flex-col items-center rounded-2xl mx-auto shadow-[0_10px_20px_rgba(10,10,10,0.7)]">
+                            <div className="w-3/4 max-w-72 min-h-18 h-18 bg-[#B6B6B6] rounded-2xl p-2">
                                 <button onClick={() => { setPage('login') }} className={`${page === 'login' && 'bg-[#EBEAEA] rounded-xl shadow-gray-500 shadow-lg'} w-2/4 h-full text-center cursor-pointer font-light text-xl`}>Login</button>
                                 <button onClick={() => { setPage('signup') }} className={`${page === 'signup' && 'bg-[#EBEAEA] rounded-xl shadow-gray-500 shadow-lg'} w-2/4 h-full text-center cursor-pointer font-light text-xl`}>Sign Up</button>
                             </div>

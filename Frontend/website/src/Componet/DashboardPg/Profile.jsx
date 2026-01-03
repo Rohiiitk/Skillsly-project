@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { UserContext } from '../Context/UserContext';
 
 const userSkills = ["Python", "Editing", "Java", "Guitar"];
 const userWork = [
@@ -45,9 +46,9 @@ const WorkCarousel = ({ workItems }) => {
         <div className="overflow-hidden flex-grow">
           <div
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ 
-                transform: `translateX(${translateValue}%)`, 
-                width: `${workItems.length * (100 / itemsPerView)}%` 
+            style={{
+              transform: `translateX(${translateValue}%)`,
+              width: `${workItems.length * (100 / itemsPerView)}%`
             }}
           >
             {workItems.map((item) => (
@@ -81,6 +82,10 @@ const WorkCarousel = ({ workItems }) => {
 };
 
 const UserProfile = () => {
+
+  const { user } = React.useContext(UserContext);
+  console.log("User data in Profile:", user);
+
   return (
     <div className="p-6 md:p-10 w-full h-full">
       <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-10 mb-12">
@@ -103,10 +108,10 @@ const UserProfile = () => {
         </div>
 
         <div className="flex-grow">
-          <h1 className="text-3xl font-semibold text-white mb-4">Rohit</h1>
+          <h1 className="text-3xl font-semibold text-white mb-4">{user?.userName}</h1>
           <p className="text-gray-300 leading-relaxed mb-6">
-            Creative technologist with a passion for storytelling and automation. 
-            Skilled in video editing and Python programming, blending visual artistry 
+            Creative technologist with a passion for storytelling and automation.
+            Skilled in video editing and Python programming, blending visual artistry
             with smart scripting to produce engaging content and efficient workflows.
           </p>
 

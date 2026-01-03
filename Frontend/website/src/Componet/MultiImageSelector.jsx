@@ -18,7 +18,9 @@ const MultiImageSelector = ({ images, setImages, max = 5 }) => {
         }));
 
         setImages(prev => [...prev, ...newImages]);
-        e.target.value = null; // reset input
+        e.target.value = null;
+
+        console.log("Selected files:", selectedFiles);
     };
 
     const removeImage = (index) => {
